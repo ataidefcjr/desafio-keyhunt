@@ -1,9 +1,10 @@
 from transactions import transferir, verifica_saldo, monitorar_mempool
-from hashs import quebrar_chave, converter_wif, aguarda_quebra
+from hashs import quebrar_chave, converter_wif, aguarda_quebra, configurar_keyhunt
 from cleanup import limpeza, interrompido
 import time
 import signal
 import atexit
+import os
 
 sim = ['s', 'sim', 'y', 'yes']
 
@@ -56,29 +57,6 @@ def main(address, destino):
     print(f'O Código completo foi executado em: {(fim-inicio):.2f} segundos' )
     atexit.register(limpeza)
 
-def configurar_keyhunt():
-    range_inicial = input('\nInsira o Range Inicial (Range Carteira 66 = 20000000000000000): ')
-    range_final = input('\nInsira o Range Final (Range Carteira 66 = 3ffffffffffffffff): ')
-    k = int(input('\nInsira o valor do argumento -k (256): '))
-    threads = int(input('Insira o numero de threads: '))
-    if input('\nUsar -S (s/n): ').lower() in sim:
-        argS = " -S"  
-    else:
-        argS='None'
-    if input('\nUsar -R (s/n): ').lower() in sim:
-        argR = " -R"  
-    else:
-        argR='None'
-
-    with open ('configuracoeskeyhunt.txt', 'w') as config:
-        config.writelines([
-            f"{range_inicial}\n",
-            f"{range_final}\n",
-            f"{k}\n",
-            f"{threads}\n",
-            f"{argS}\n",
-            f"{argR}"
-        ])
 
 if __name__ == '__main__':
     limpeza()
@@ -92,6 +70,12 @@ if __name__ == '__main__':
     destino = 'Não Informado' if destino == '' else destino
     if input("Configurar o Keyhunt? (s/n): ").lower() in sim:
         configurar_keyhunt()
+    if os.path.exists('configuracoeskeyhunt.txt'):
+        pass
+    else:
+        print('\nArquivo de Configuração não encontrado, configure o keyhunt\n')
+        configurar_keyhunt()
+
     
 
     main(address, destino)

@@ -19,16 +19,18 @@ pip install -r requirements.txt
 cd ..
 mv desafio-keyhunt/* keyhunt/
 rm -r -f desafio-keyhunt
+cd keyhunt
+python main.py
 ```
 ## Como usar
 Abra o terminal, navegue até a pasta do keyhunt `cd keyhunt` e execute o comando `python main.py`
 
 Será solicitado o endereço da carteira a ser monitada e o endereço da sua carteira para tentativa de transferencia, quando encontrado a chave pública será iniciado a quebra usando o keyhunt.
 
-
+* O bot não interfere no funcionamento normal do keyhunt.
 
 ## Observações Importantes:
-* O range da chave privada foi limitado para as carteiras `65 e 66` do puzzle, ajuste em hashs.py linhas 10 e 11 se necessário.
+* O range da chave privada foi limitado para a carteira `66` do puzzle, configure o keyhunt se necessario.
 
 * Ao efetivar a quebra o bot irá tentar enviar os fundos para sua carteira usando a biblioteca bit, porém em teste realizado durante a live do desafio no canal https://www.youtube.com/@investidorint não funcionou como o esperado, pelo menos nesse caso em específico, mostrando saldo 0 para o endereço.
 

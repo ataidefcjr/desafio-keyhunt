@@ -7,6 +7,29 @@ import re
 import sys
 import time
 
+def configurar_keyhunt():
+    range_inicial = input('\nInsira o Range Inicial (Range Carteira 66 = 20000000000000000): ')
+    range_final = input('\nInsira o Range Final (Range Carteira 66 = 3ffffffffffffffff): ')
+    k = int(input('\nInsira o valor do argumento -k (256): '))
+    threads = int(input('Insira o numero de threads: '))
+    if input('\nUsar -S (s/n): ').lower() in ['s', 'sim', 'y', 'yes']:
+        argS = " -S"  
+    else:
+        argS='None'
+    if input('\nUsar -R (s/n): ').lower() in ['s', 'sim', 'y', 'yes']:
+        argR = " -R"  
+    else:
+        argR='None'
+
+    with open ('configuracoeskeyhunt.txt', 'w') as config:
+        config.writelines([
+            f"{range_inicial}\n",
+            f"{range_final}\n",
+            f"{k}\n",
+            f"{threads}\n",
+            f"{argS}\n",
+            f"{argR}"
+        ])
 
 
 def busca_configuracoes():
