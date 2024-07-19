@@ -64,8 +64,10 @@ if __name__ == '__main__':
     executar_teste = input('Deseja executar o teste na carteira 65? (s/n): ').lower() 
     if executar_teste in sim:
         address = '18ZMbwUFLMHoZBbfpCjUJQTCMCbktshgpe' ##Carteira do Puzzle 65
+        print('\nConfigure o Keyhunt\nRange da carteira 65: 10000000000000000:1ffffffffffffffff')
     else:
         address = input('Insira o endereço da carteira que deseja procurar: ')
+
     destino = input('Insira o endereço da sua carteira (ao deixar o campo vazio não tentará transferir): ')
     destino = 'Não Informado' if destino == '' else destino
     if input("Configurar o Keyhunt? (s/n): ").lower() in sim:
