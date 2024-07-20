@@ -31,6 +31,13 @@ def configurar_keyhunt():
             f"{argR}"
         ])
 
+def verifica_keyhunt():
+    if not os.path.exists('keyhunt'):
+        print('Abordando... '
+              '\nkeyhunt não encontrado'
+              '\nleia as instruções no github'
+              '\nhttps://github.com/ataidefcjr/desafio-keyhunt')
+        exit()
 
 def busca_configuracoes():
     with open('configuracoeskeyhunt.txt', 'r') as config:
@@ -93,7 +100,7 @@ def converter_wif(address, private_key_hex: str) -> str:
     
     return wif_compressed.decode('utf-8')
 
-def aguarda_quebra(segundos:int): #Apos chamar o quebrar chave, fica procurando a key no arquivo Found.txt na raiz
+def aguarda_quebra(segundos:int): #Apos chamar o quebrar chave, fica procurando a key no arquivo KEYFOUNDKEYFOUND.txt na raiz
     found = 'KEYFOUNDKEYFOUND.txt'
     time.sleep(1)
     for x in range(segundos):

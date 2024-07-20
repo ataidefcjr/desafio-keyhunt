@@ -1,5 +1,5 @@
 from transactions import transferir, verifica_saldo, monitorar_mempool
-from hashs import quebrar_chave, converter_wif, aguarda_quebra, configurar_keyhunt
+from hashs import quebrar_chave, converter_wif, aguarda_quebra, configurar_keyhunt, verifica_keyhunt
 from cleanup import limpeza, interrompido
 import time
 import signal
@@ -60,6 +60,7 @@ def main(address, destino):
 
 if __name__ == '__main__':
     limpeza()
+    verifica_keyhunt()
     print('---\nIniciando Script, Atenção, esse script monitora as transações da carteira "alvo" e usa KEYHUNT pra quebrar a chave pública na privada, converte em WIF e tenta realizar uma transferencia para sua conta, o código ainda está em desenvolvimento, esteja pronto para transferir manualmente caso falhe.\n---\n')
     executar_teste = input('Deseja executar o teste na carteira 65? (s/n): ').lower() 
     if executar_teste in sim:

@@ -56,27 +56,24 @@ def verifica_saldo(endereco):
 def monitorar_mempool(address):
     while True:
         try:
-            url = f'https://blockchain.info/rawaddr/{address}'
+            url = f'https://blockchain.info/q/pubkeyaddr/{address}'
             response = requests.get(url)
-            print(f'Procurando Chave Pública... Chamando API... Resposta API: {response}')
+            print(f'Procurando Chave Pública...\nResposta API: {response}')
             if response.status_code == 200:
-                data = response.json()
-                transactions = data.get('txs', [])
-            if transactions:
-                for tx in transactions:
-                    for input_tx in tx.get('inputs', []):
-                        if input_tx.get('prev_out', {}).get('addr') == address:
-                            script = input_tx.get('script')
-                            if script != '':
-                                script = script[-66:]
-                                with open('PublicKey.txt', 'a') as pk:
-                                    pk.write(f'Endereço: {address} \nChave Pública: {script}\n\n')
-                                return script
-
-            print('Não encontrada chave publica, tentando novamente em 5 segundos\n Procurando...\nAo encontrar uma página será aberta para conferencia da chave pública...')
+                chave = response.text
+                print (
+                    f'\n\n------------------------------------------------------------------------------------'
+                    f'\n\nChave Pública: {chave}'
+                    f'\n\n------------------------------------------------------------------------------------\n')
+                return chave 
+                   
+            print('Não encontrada, tentando novamente em 5 segundos...')
             sleep(5)
+
         except Exception as e:
-            print (f"Ocorreu uma Excessão ao chamar a API\nSe ocorrer varias vezes verifique se o endereço fornecido está correto\nTentando novamente em 5 segundos")
+            print (f"\n{e}\nOcorreu uma Excessão ao chamar a API"
+                   "\nSe ocorrer varias vezes verifique se o endereço fornecido está correto"
+                   "\nTentando novamente em 5 segundos")
             sleep(5)
 
 
